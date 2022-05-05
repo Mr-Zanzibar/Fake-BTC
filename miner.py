@@ -29,7 +29,7 @@ class Bitcoin():
     def title_task(self):
         while True:
             time.sleep(0.08)
-            os.system("title [Mr-Cuda Miner] Profit: %s ^| Checked: %s" % (self.profit, self.checked))
+            os.system("title [Mr-Cuda] Profit: %s ^| Checked: %s" % (self.profit, self.checked))
 
     def generate_private_key(self):
         return binascii.hexlify(os.urandom(32)).decode("utf-8")
