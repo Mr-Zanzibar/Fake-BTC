@@ -1,5 +1,5 @@
 # Fake-BTC
-A simple fake bitcoin miner in in python
+fake bitcoin miner made in python
 
 # How to start
 
