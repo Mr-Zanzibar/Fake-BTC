@@ -3,4 +3,6 @@ fake bitcoin miner made in python
 
 # How to start
 
-start miner.py
+- Install [Python](https://python.org/download)
+
+- click on start.bat
