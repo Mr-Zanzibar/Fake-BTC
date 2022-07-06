@@ -1,4 +1,4 @@
 @echo off
-TITLE Bitcoin miner
+TITLE Bitcoin Miner
 Python miner.py
 pause
