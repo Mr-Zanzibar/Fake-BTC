@@ -12,4 +12,4 @@ fake bitcoin miner made in python
 
 - if you get this error try clicking on install.bat
 
-- or install everything manually with the pip
+- or install everything manually with the pip.
