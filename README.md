@@ -1,15 +1,19 @@
 # Fake-BTC
-fake bitcoin miner made in python
+Fake bitcoin miner made in python
 
 # How to start
 
 - Install [Python](https://python.org/download)
 
-- click on start.bat
+- Click on start.bat
+
+- then choose your preferred option
 
 
-# Module not found error?
+# Update
 
-- if you get this error try clicking on install.bat
+- First (real) update after 10 months!
 
-- or install everything manually with the pip.
+- improved the code and now the start.bat file is __interactive
+
+- now the file can be automatically compiled into an .exe file
