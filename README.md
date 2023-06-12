@@ -14,6 +14,6 @@ Fake bitcoin miner made in python
 
 - First (real) update after 10 months!
 
-- improved the code and now the start.bat file is __interactive
+- improved the code and now the start.bat file is __interactive__
 
 - now the file can be automatically compiled into an .exe file
