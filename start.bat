@@ -1,9 +1,9 @@
 @echo off
 
-echo Select an option:
-echo 1. Run the Python code
-echo 2. Compile the Python code into an .exe file
-echo 3. Display the credits list
+echo  Select an option:
+echo  1. Run the Python code
+echo  2. Compile the Python code into an .exe file
+echo  3. Display the credits list
 
 set /p choice=Enter the option number:
 
