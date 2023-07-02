@@ -19,7 +19,7 @@ if "%choice%"=="1" (
 ) else if "%choice%"=="3" (
     echo Credits:
     echo - Mr-Zanzibar https://github.com/Mr-Zanzibar/Fake-BTC
-    echo - Discord: Don.zanzibar#3562
+    echo - Discord: don.zanzibar
 ) else (
     echo Invalid option.
 )
