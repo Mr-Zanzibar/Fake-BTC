@@ -18,7 +18,7 @@ if "%choice%"=="1" (
     echo The .exe file has been created successfully.
 ) else if "%choice%"=="3" (
     echo Credits:
-    echo - Mr-Zanzibar https://github.com/Mr-Zanzibar/Fake-BTC
+    echo - Mr-Zanzibar: https://github.com/Mr-Zanzibar/Fake-BTC
     echo - Discord: don.zanzibar
 ) else (
     echo Invalid option.
