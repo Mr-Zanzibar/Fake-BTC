@@ -1,5 +1,5 @@
 # Fake-BTC
-Fake bitcoin miner made in python
+Fake Bitcoin miner made in python
 
 # How to start
 
@@ -8,12 +8,3 @@ Fake bitcoin miner made in python
 - Click on start.bat
 
 - then choose your preferred option
-
-
-# Update
-
-- First (real) update after 10 months!
-
-- improved the code and now the start.bat file is __interactive__
-
-- now the file can be automatically compiled into an .exe file
