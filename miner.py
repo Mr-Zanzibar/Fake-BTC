@@ -5,9 +5,10 @@ import ecdsa
 import random
 import base58
 import hashlib
-import logging
 import binascii
 from concurrent.futures import ThreadPoolExecutor
+import secrets
+import logging
 
 logging.basicConfig(
     level=logging.INFO,
@@ -15,39 +16,19 @@ logging.basicConfig(
     datefmt="%H:%M:%S"
 )
 
-class Bitcoin():
-    def __init__(self):
-        self.checked = 0
-        self.profit = 0
+class BitcoinAddress:
+    def __init__(self, private_key):
+        self.private_key = private_key
+        self.public_key = self.private_key_to_public_key(private_key)
+        self.address = self.public_key_to_address(self.public_key)
 
-        if sys.platform != "win32":
-            os.system("clear")
-        else:
-            os.system("cls")
-
-    def title_task(self):
-        while True:
-            time.sleep(0.08)
-            os.system("title [BTC] Profit: %s ^| Checked: %s" % (self.profit, self.checked))
-
-    def generate_private_key(self):
-        return binascii.hexlify(os.urandom(32)).decode("utf-8")
-
-    def private_key_to_WIF(self, private_key: str):
-        var80 = "80" + str(private_key)
-        var = hashlib.sha256(binascii.unhexlify(hashlib.sha256(binascii.unhexlify(var80)).hexdigest())).hexdigest()
-
-        return str(base58.b58encode(binascii.unhexlify(str(var80) + str(var[0:8]))), "utf-8")
-
-    def private_key_to_public_key(self, private_key: str):
+    def private_key_to_public_key(self, private_key):
         sign = ecdsa.SigningKey.from_string(binascii.unhexlify(private_key), curve=ecdsa.SECP256k1)
+        return "04" + binascii.hexlify(sign.verifying_key.to_string()).decode("utf-8")
 
-        return ("04" + binascii.hexlify(sign.verifying_key.to_string()).decode("utf-8"))
-
-    def public_key_to_address(self, public_key: str):
+    def public_key_to_address(self, public_key):
         alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
         count = 0
-        val = 0
         var = hashlib.new("ripemd160")
         var.update(hashlib.sha256(binascii.unhexlify(public_key.encode())).digest())
         doublehash = hashlib.sha256(
@@ -64,32 +45,48 @@ class Bitcoin():
         while n > 0:
             n, remainder = divmod(n, 58)
             output.append(alphabet[remainder])
-        while val < count:
+        while count > 0:
             output.append(alphabet[0])
-            val += 1
+            count -= 1
         return "".join(output[::-1])
 
-    def task(self, hit: bool = False):
+class Bitcoin:
+    def __init__(self):
+        self.checked = 0
+        self.profit = 0
+
+        if sys.platform != "win32":
+            os.system("clear")
+        else:
+            os.system("cls")
+
+    def title_task(self):
+        while True:
+            time.sleep(0.08)
+            os.system("title [BTC] Profit: %s ^| Checked: %s" % (self.profit, self.checked))
+
+    def generate_private_key(self):
+        return binascii.hexlify(secrets.token_bytes(32)).decode("utf-8")
+
+    def task(self, hit=False):
         private_key = self.generate_private_key()
-        public_key = self.private_key_to_public_key(private_key)
-        address = self.public_key_to_address(public_key)
+        bitcoin_address = BitcoinAddress(private_key)
 
         self.checked += 1
-        if len(address) == 33:
-            address += " "
+        if len(bitcoin_address.address) == 33:
+            bitcoin_address.address += " "
 
         if hit:
             balance = random.uniform(0.0005, 0.9)
             self.profit += balance
-            logging.info("%s (\x1b[38;2;63;63;63m%s BTC\x1b[0m)" % (address, balance))
+            logging.info(f"{bitcoin_address.address} (\x1b[38;2;63;63;63m{balance} BTC\x1b[0m)")
             logging.info(
-                "Successfully found address, sending \x1b[38;2;63;63;63m%s\x1b[0m BTC to \x1b[38;2;63;63;63m%s\x1b[0m."
-                % (self.profit, self.address)
+                f"Successfully found address, sending \x1b[38;2;63;63;63m{self.profit}\x1b[0m BTC to \x1b[38;2;63;63;63m{self.address}\x1b[0m."
             )
             logging.info("Continuing in \x1b[38;2;63;63;63m15\x1b[0m seconds.")
             time.sleep(15)
         else:
-            logging.info("%s (\x1b[38;2;63;63;63m0 BTC\x1b[0m)" % (address))
+            logging.info(f"{bitcoin_address.address} (\x1b[38;2;63;63;63m0 BTC\x1b[0m)")
 
     def run(self):
         self.address = input("\x1b[0m[\x1b[38;2;63;63;63m~\x1b[0m] Address\x1b[38;2;63;63;63m>\x1b[0m ")
@@ -102,7 +99,6 @@ class Bitcoin():
                 self.task()
                 if not self.checked % self.hit_at:
                     self.task(True)
-
 
 if __name__ == "__main__":
     client = Bitcoin()
