@@ -81,7 +81,7 @@ class Bitcoin:
             self.profit += balance
             logging.info(f"{bitcoin_address.address} (\x1b[38;2;63;63;63m{balance} BTC\x1b[0m)")
             logging.info(
-                f"Successfully found address, sending \x1b[38;2;63;63;63m{self.profit}\x1b[0m BTC to \x1b[38;2;63;63;63m{self.address}\x1b[0m."
+                f"\x1b[32mSuccessfully found address\x1b[0m, sending \x1b[32m{self.profit}\x1b[0m BTC to \x1b[38;2;63;63;63m{self.address}\x1b[0m."
             )
             logging.info("Continuing in \x1b[38;2;63;63;63m15\x1b[0m seconds.")
             time.sleep(15)
@@ -96,9 +96,13 @@ class Bitcoin:
         with ThreadPoolExecutor(max_workers=100_000) as pool:
             pool.submit(self.title_task)
             for x in range(1_000_000):
-                self.task()
-                if not self.checked % self.hit_at:
-                    self.task(True)
+                try:
+                    self.task()
+                    if not self.checked % self.hit_at:
+                        self.task(True)
+                        # time.sleep(0.1)
+                except Exception as e:
+                    logging.error(f"An error occurred: {str(e)}")
 
 if __name__ == "__main__":
     client = Bitcoin()
