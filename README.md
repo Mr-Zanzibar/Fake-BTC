@@ -20,7 +20,7 @@
 
 - you can still use this code!
 
-- you can download the pre-compiled [version]("https://github.com/Mr-Zanzibar/Fake-BTC/releases/tag/PRE-Compiled")
+- you can download the pre-compiled version
 
 ---
 
