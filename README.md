@@ -1,3 +1,6 @@
+[![Total downloads](https://img.shields.io/github/downloads/Mr-Zanzibar/Fake-BTC/total.svg?label=Downloads&logo=github&cacheSeconds=600&style=plastic)](https://github.com/Mr-Zanzibar/Fake-BTC/releases/tag/PRE-Compiled)
+
+
 # <p align="center"> Fake-Bitcoin-Miner </p>
 
 <div align="center">
